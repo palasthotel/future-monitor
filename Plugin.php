@@ -4,15 +4,15 @@
  * Plugin URI: https://palasthotel.de
  * Description: Monitors the future of your system. For example planned posts...
  * Version: 1.0.0
- * Author: Palasthotel <edward.bock@palasthotel.de>
+ * Author: Palasthotel by Edward Bock <edward.bock@palasthotel.de>
  * Author URI: https://palasthotel.de
  * Text Domain: future-monitor
  * Domain Path: /languages
  * Requires at least: 4.0
- * Tested up to: 5.2.2
+ * Tested up to: 5.3.2
  * License: http://www.gnu.org/licenses/gpl-3.0.html GPLv3
  *
- * @copyright Copyright (c) 2019, Palasthotel
+ * @copyright Copyright (c) 2020, Palasthotel
  * @package Palasthotel\FutureMonitor
  */
 
