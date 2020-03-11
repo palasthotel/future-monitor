@@ -1,5 +1,5 @@
 === Future Monitor ===
-Contributors: edwardbock,palasthotel
+Contributors: edwardbock, palasthotel
 Donate link: https://palasthotel.de/
 Tags: dashboard, widget, planned posts, schedule visualization
 Requires at least: 4.0
