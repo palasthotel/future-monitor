@@ -1,0 +1,17 @@
+{
+    "autoload": {
+        "classmap": [
+            "classes"
+        ],
+		"psr-4": {
+			"Palasthotel\\FutureMonitor\\": "classes"
+		}
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    },
+	"require": {
+		"ext-curl": "*",
+		"ext-json": "*"
+	}
+}
