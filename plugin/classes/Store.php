@@ -4,14 +4,16 @@
 namespace Palasthotel\FutureMonitor;
 
 
+use WP_Post;
+
 class Store {
 
-	private $post_ids;
+	private ?array $post_ids = null;
 
 	/**
-	 * @return array
+	 * @return int[]
 	 */
-	public function getScheduledPostIdsFromOptions() {
+	public function getScheduledPostIdsFromOptions(): array {
 
 		if ( $this->post_ids == NULL ) {
 			$cron = get_option( "cron" );
@@ -36,9 +38,9 @@ class Store {
 	}
 
 	/**
-	 * @return \WP_Post[]
+	 * @return WP_Post[]
 	 */
-	public function getFuturePostIds() {
+	public function getFuturePostIds(): array {
 		return get_posts( array(
 			'fields'         => 'ids',
 			"post_status"    => "future",
@@ -50,9 +52,9 @@ class Store {
 	}
 
 	/**
-	 * @return \WP_Post[]
+	 * @return WP_Post[]
 	 */
-	public function getPublishablePostIds() {
+	public function getPublishablePostIds(): array {
 		return get_posts( array(
 			'fields'         => 'ids',
 			"post_status"    => "future",

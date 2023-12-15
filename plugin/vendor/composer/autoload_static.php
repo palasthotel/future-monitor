@@ -21,7 +21,7 @@ class ComposerStaticInitcee45bc917afd312f76959aa7478f42e
     );
 
     public static $classMap = array (
-        'Palasthotel\\FutureMonitor\\DashboardWidget' => __DIR__ . '/../..' . '/classes/DashboardWidget.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
