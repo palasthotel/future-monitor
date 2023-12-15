@@ -28,7 +28,7 @@ class Plugin extends Components\Plugin {
 	public Schedule $schedule;
 	public DashboardWidget $dashboardWidget;
 
-	public function onCreate() {
+	public function onCreate(): void {
 		$this->loadTextdomain(Plugin::DOMAIN, "languages");
 
 		$this->store = new Store();
