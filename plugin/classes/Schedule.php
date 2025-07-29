@@ -12,8 +12,12 @@ class Schedule extends Component {
 		add_action( Plugin::SCHEDULE_ACTION, array($this,'execute'));
 	}
 
-	public function isScheduled(): bool|int {
-		return wp_next_scheduled( Plugin::SCHEDULE_ACTION );
+	public function isScheduled(): bool {
+        	$next_scheduled = wp_next_scheduled( Plugin::SCHEDULE_ACTION );
+        	if( $next_scheduled === false || $next_scheduled === 0 ) {
+            		return false;
+        	}
+		return true;
 	}
 
 	public function start(): void {
