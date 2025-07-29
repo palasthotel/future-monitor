@@ -9,6 +9,8 @@ namespace Palasthotel\FutureMonitor;
  */
 class DashboardWidget {
 
+	public $plugin;
+
 	const ID = "future-posts-monitor";
 
 	public function __construct(Plugin $plugin) {
