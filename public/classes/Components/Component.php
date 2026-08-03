@@ -3,6 +3,8 @@
 
 namespace Palasthotel\FutureMonitor\Components;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Class Component
  *

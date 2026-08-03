@@ -3,6 +3,7 @@
 
 namespace Palasthotel\FutureMonitor;
 
+defined( 'ABSPATH' ) || exit;
 
 /**
  * @property Plugin plugin
@@ -19,7 +20,13 @@ class DashboardWidget {
 	}
 
 	public function setup(){
-		wp_add_dashboard_widget(self::ID, __("Future posts monitor", Plugin::DOMAIN), array($this, 'render_future_posts'));
+		// The dashboard is reachable with the "read" capability, so without this
+		// check a subscriber would see the titles of every scheduled post. Core
+		// gates its own widgets the same way.
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return;
+		}
+		wp_add_dashboard_widget(self::ID, __("Future posts monitor", 'future-monitor'), array($this, 'render_future_posts'));
 	}
 
 	public function render_future_posts(){
@@ -35,6 +42,12 @@ class DashboardWidget {
 		));
 		while ($query->have_posts()){
 			$query->the_post();
+
+			// An author is only shown what they may edit anyway.
+			if ( ! current_user_can( 'edit_post', get_the_ID() ) ) {
+				continue;
+			}
+
 			echo "<p>";
 			if(in_array(get_the_ID(), $post_ids)) {
 				echo "✅ ";
@@ -43,14 +56,18 @@ class DashboardWidget {
 			} else {
 				echo "🚨 ";
 			}
-			$link = get_edit_post_link(get_the_ID());
-			echo "<a href='$link' target='_blank'>";
+			printf( "<a href='%s' target='_blank'>", esc_url( get_edit_post_link( get_the_ID() ) ) );
 			the_title();
 			echo "</a>";
 			echo "<br/>";
 			echo "<span class='description'>";
 
-			echo date_i18n(get_option("date_format")." – ".get_option("time_format"), strtotime(get_post()->post_date));
+			echo esc_html(
+				date_i18n(
+					get_option("date_format")." – ".get_option("time_format"),
+					strtotime(get_post()->post_date)
+				)
+			);
 
 			echo "</span>";
 			echo "</p>";
@@ -60,15 +77,15 @@ class DashboardWidget {
 		echo "<hr>";
 
 		echo "<p>";
-		_e("✅️ posts are monitored by WordPress Core for future publication.", Plugin::DOMAIN);
+		esc_html_e("✅️ posts are monitored by WordPress Core for future publication.", 'future-monitor');
 		echo "</p>";
 
 		echo "<p>";
-		_e("⚠️ posts are not monitored by WordPress Core for future publication, but I promise to publish them (Future Monitor Plugin).", Plugin::DOMAIN);
+		esc_html_e("⚠️ posts are not monitored by WordPress Core for future publication, but I promise to publish them (Future Monitor Plugin).", 'future-monitor');
 		echo "</p>";
 
 		echo "<p>";
-		_e("Open and resave all future posts with 🚨.", Plugin::DOMAIN);
+		esc_html_e("Open and resave all future posts with 🚨.", 'future-monitor');
 		echo "</p>";
 
 
