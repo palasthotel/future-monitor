@@ -3,6 +3,8 @@
 
 namespace Palasthotel\FutureMonitor;
 
+defined( 'ABSPATH' ) || exit;
+
 
 use WP_Post;
 
